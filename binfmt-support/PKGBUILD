@@ -27,9 +27,11 @@ build() {
   cd ${pkgname}-${pkgver}
   ./configure             \
     --prefix=/usr         \
+    --bindir=/usr/bin     \
     --sbindir=/usr/bin    \
     --libexecdir=/usr/bin \
-    --bindir=/usr/bin
+    --localstatedir=/var
+    
   make ${MAKEFLAGS}
 }
 
