@@ -1,0 +1,40 @@
+# Maintainer: SputnikRocket <sptrw@tuta.io>
+
+pkgname=binfmt-support
+pkgver=2.2.2
+pkgrel=1
+pkgdesc='Support for extra binary formats'
+arch=('aarch64')
+url='https://binfmt-support.nongnu.org'
+license=('GPL3')
+depends=(
+  'libpipeline'
+)
+
+makedepends=(
+  'libpipeline'
+)
+
+source=(
+  "$pkgname-$pkgver.tar.gz::http://deb.debian.org/debian/pool/main/b/binfmt-support/${pkgname}_${pkgver}.orig.tar.gz"
+)
+
+sha512sums=(
+  '7bdbb231490bfa103b72ef063158ebb263955b72b00b938a1ff6bfd33bba8473fbb6f3225823faa7f5f48973f829b91564e1f131f6ab79172872c65e653be21d'
+)
+
+build() {
+  cd ${pkgname}-${pkgver}
+  ./configure              \
+    --prefix=/usr          \
+    --sbindir=/usr/bin    \
+    --libexecdir=/usr/bin \
+    --bindir=/usr/bin
+  make ${MAKEFLAGS}
+}
+
+package() {
+  cd ${pkgname}-${pkgver}
+  make DESTDIR="${pkgdir}" PREFIX=/usr install
+  install -Dm644 COPYING "$pkgdir"/usr/share/licenses/"${pkgname}"/LICENSE
+}
