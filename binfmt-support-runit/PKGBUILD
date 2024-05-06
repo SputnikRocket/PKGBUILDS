@@ -1,0 +1,29 @@
+# Maintainer: SputnikRocket <sptrw@tuta.io>
+
+pkgname="binfmt-support-runit"
+pkgver="1.0.0"
+pkgrel="1"
+pkgdesc="binfmt-support service files for use with runit"
+arch=("aarch64")
+url='https://github.com/void-linux/void-packages/tree/master/srcpkgs/binfmt-support'
+license=("GPL3")
+depends=(
+  'binfmt-support'
+)
+
+source=(
+  "run"
+  "finish"
+)
+
+sha512sums=(
+  '82208f4a40bb65394e0a484e0092be5ec3e2c4be60859d7e9d154e9bc13dfb5aeafe1cc65041980b2ac1f0bc58c24db21b2c874171d091609cc961cf6f05f531'
+  'eec6614e5fad918cbc736a8c5d3bbfc183a868c9e85afc5e5d5e6b79974e91682a16f49e4bb1c20221fa75d178a4372373b18184a531d2556993469cc640e7c5'
+)
+
+package() {
+  mkdir -p "${pkgdir}/etc/runit/sv/binfmt-support"
+  cp "${srcdir}/run" "${pkgdir}/etc/runit/sv/binfmt-support/run"
+  cp "${srcdir}/finish" "${pkgdir}/etc/runit/sv/binfmt-support/finish"
+  chmod -R 755 "${pkgdir}/etc/runit/sv/binfmt-support"
+}
