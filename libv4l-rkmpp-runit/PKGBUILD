@@ -1,0 +1,27 @@
+# Maintainer: SputnikRocket <sptrw@tuta.io>
+
+pkgname="libv4l-rkmpp-runit"
+pkgver="1.0.0"
+pkgrel="1"
+pkgdesc="libv4l-rkmpp wrapper service files for use with runit"
+arch=("aarch64")
+url='https://github.com/7Ji-PKGBUILDs/libv4l-rkmpp-git'
+license=("LGPL2.1")
+depends=(
+  'libv4l-rkmpp-git'
+  'runit'
+)
+
+source=(
+  "run"
+)
+
+sha512sums=(
+  'd69f34d5b4bd0600f19da1f56b1efbe72a311ae0a61c16b331c645141171bf5ae3b863c1603bfea64a3e5603f80ad5106d8c496b864c32ee9a1412b818696114'
+)
+
+package() {
+  mkdir -p "${pkgdir}/etc/runit/sv/libv4l-rkmpp-setup"
+  cp "${srcdir}/run" "${pkgdir}/etc/runit/sv/libv4l-rkmpp-setup/run"
+  chmod -R 755 "${pkgdir}/etc/runit/sv/libv4l-rkmpp-setup"
+}

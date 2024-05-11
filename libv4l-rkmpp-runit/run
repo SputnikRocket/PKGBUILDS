@@ -1,0 +1,6 @@
+#!/bin/sh
+exec 2>&1
+set -e
+source /etc/conf.d/libv4l-rkmpp
+/usr/bin/libv4l-rkmpp-setup.sh $PROFILE
+exec chpst -b libv4l-rkmpp-setup.sh pause
