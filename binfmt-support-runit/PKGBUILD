@@ -9,6 +9,7 @@ url='https://github.com/void-linux/void-packages/tree/master/srcpkgs/binfmt-supp
 license=("GPL3")
 depends=(
   'binfmt-support'
+  'runit'
 )
 
 source=(
